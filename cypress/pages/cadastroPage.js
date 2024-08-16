@@ -16,7 +16,6 @@ class CadastroPage {
     }
 
     buttonRegister(){
-        cy.visit('https://adopet-frontend-cypress.vercel.app/')
         cy.get(this.selectorsList().buttonRegister).click()   
     }
 

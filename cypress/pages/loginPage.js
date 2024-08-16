@@ -4,7 +4,6 @@ class LoginPage {
             email: "[data-test='input-loginEmail']",
             password: "[data-test='input-loginPassword']",
             buttonLogin: "[data-test='submit-button']",
-
         }
         return selectors
     }
@@ -20,7 +19,6 @@ class LoginPage {
         const selectors = this.selectorsList();
         cy.get(selectors.email).type('brunosr099@outlook.com');
         cy.get(selectors.password).type('Senha1234');
-
     }
 
     loginInvalid(){
