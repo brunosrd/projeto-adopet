@@ -12,7 +12,7 @@ class CadastroPage {
     }
 
     accessCadastro(){
-       cy.visit('https://adopet-frontend-cypress.vercel.app/cadastro')
+       cy.visit('/cadastro')
     }
 
     buttonRegister(){

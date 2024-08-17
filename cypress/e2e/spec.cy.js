@@ -1,8 +1,7 @@
 import LoginPage from '../pages/loginPage';
 import HomePage from '../pages/homePage';
 import CadastroPage from '../pages/cadastroPage'
-import userData  from '../fixtures/user-data.json'
-import { commands } from '../support/commands';
+import userData   from '../fixtures/user-data.json'
 
 
 const loginPage = new LoginPage()
@@ -12,32 +11,31 @@ const cadastroPage = new CadastroPage()
 
 describe('AdoPet', () => {
   beforeEach(() => {
-    cy.visit('https://adopet-frontend-cypress.vercel.app/');
+    cy.visit('https://adopet-frontend-cypress.vercel.app');
+    cy.get("[data-test='login-button']").click()
+    cy.intercept('POST', 'https://adopet-api-i8qu.onrender.com/adotante/login', { //URL no console do inspecionar da frase do erro
+      statusCode: 400, 
+      body: { message: 'Falha no login. Consulte suas credenciais.' }
+    }).as('stubPost')   
+      
   })
-  it('Registration - Success', () => {
-    cadastroPage.buttonRegister()
-    cy.cadastrar(userData.nome, userData.email, userData.password, userData.password) //commands
 
-    // cadastroPage.buttonRegister()
-    // cadastroPage.correctRegistrationInit()
-    // verificar
+  it('Registration - Success', () => {
+    cadastroPage.accessCadastro()
+    cadastroPage.correctRegistrationInit()
   })
   
   it('Registration - Failed', () =>{
-    cadastroPage.buttonRegister()
+    cadastroPage.accessCadastro()
     cadastroPage.buttonCadastration()
     cadastroPage.incorrectRegistration()
-    //verificar
   })
 
   it('Login - Success', () => {
     loginPage.accessLoginPage()
-    cy.login(userData.email, userData.password) //commands
-    
-    // loginPage.accessLoginPage()
-    // loginPage.loginSuccessfully()               //pages
-    // cadastroPage.buttonCadastration()
-    //verificar
+    loginPage.loginSuccessfully()              
+    cadastroPage.buttonCadastration()
+  
   })
   
   it('Login - Failed', () => {
@@ -46,18 +44,29 @@ describe('AdoPet', () => {
 
   })
 
+  it('Deve falhar mesmo se preenchido corretamente', () => {
+    loginPage.loginSuccessfully()
+    loginPage.buttonToEnter()  
+    cy.wait('@stubPost', { timeout: 10000 }).its('response.statusCode').should('eq', 400);
+    cy.contains('Falha no login. Consulte suas credenciais.').should('be.visible')
+  })
 
-  it('Check text message', () =>{
+  it('Verifique a mensagem de erro de login', () => {
+    loginPage.accessLoginPage()
+    loginPage.loginErrorMessage()
+  })
+
+  it('Verifique a mensagem de texto', () =>{
     cy.get('.header__message').click();
     cy.login('ana@email.com','Senha123');    
   })
-  it('Check images of animals', () =>{
+  it('Confira imagens de animais', () =>{
     cy.visit('https://adopet-frontend-cypress.vercel.app/home');
     cy.get('.cards').should('be.visible');
   
   })
 
-  it('Visit website pages', () => {
+  it('Visite as páginas do site', () => {
     cy.visit('https://adopet-frontend-cypress.vercel.app/')
     cy.get("[href='/home']").click()
     cy.url().should('include', '/home')

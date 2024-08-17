@@ -13,7 +13,7 @@ class LoginPage {
     }
 
     buttonToEnter(){
-        cy.get(selectors.buttonLogin).click()
+        cy.get(this.selectorsList().buttonLogin).click()
     }
     loginSuccessfully(){
         const selectors = this.selectorsList();
@@ -28,10 +28,15 @@ class LoginPage {
         cy.get(selectors.buttonLogin).click()
         cy.contains('Por favor, verifique o email digitado').should('be.visible')
         cy.contains('A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres').should('be.visible')
-         
-
     }
 
+    loginErrorMessage(){
+        cy.get(this.selectorsList().email).click()
+        cy.get(this.selectorsList().password).click()
+        cy.get(this.selectorsList().buttonLogin).click()
+        cy.contains('É necessário informar um endereço de email').should('be.visible')
+        cy.contains('Insira sua senha').should('be.visible')
+    }
 
 }
 export default LoginPage
