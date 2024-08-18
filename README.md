@@ -1,18 +1,10 @@
 # Adopet
 
-Este repositório contém o material do curso de automatização de testes E2E com Cypress
-
-## Pré-requisitos
-
-Para fazer este curso, você precisará ter:
-
-- Node.js instalado
-- Um editor de código
-- Conhecimento básico de JavaScript
+Este repositório contém o material de automatização de testes E2E com Cypress
 
 ## Como usar
 
-Para usar o projeto do curso, siga estas etapas:
+Para usar o projeto, siga estas etapas:
 
 - Clone o repositório para o seu computador
 - Instale as dependências com `npm install`
@@ -20,7 +12,7 @@ Para usar o projeto do curso, siga estas etapas:
 
 ## Contribuições
 
-Se você quiser contribuir para este curso, você pode:
+Se quiser contribuir você pode:
 
 - Criar um pull request com suas alterações
 - Abrir um issue para reportar um problema ou sugerir uma melhoria
