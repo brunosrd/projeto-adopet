@@ -6,7 +6,6 @@ class CadastroPage {
             emailField: "[data-test='input-email']",
             passwordField: "[data-test='input-password']",
             confirmPassword: "[data-test='input-confirm-password']",
-            buttonCadastro: "[data-test='submit-button']",
         }
         return selectors
     }
@@ -22,14 +21,11 @@ class CadastroPage {
     correctRegistrationInit(){
         const selectors = this.selectorsList()
         cy.get(selectors.usernameField).type('Bruno')
-        cy.get(selectors.emailField).type('brunosr099@outlook.com')
-        cy.get(selectors.passwordField).type('Senha1234')    
-        cy.get(selectors.confirmPassword).type('Senha1234')
+        cy.get(selectors.emailField).type('brunos@teste.com')
+        cy.get(selectors.passwordField).type('Senha199')    
+        cy.get(selectors.confirmPassword).type('Senha199')
     }     
     
-    buttonCadastration(){
-        cy.get(this.selectorsList().buttonCadastro).click()
-    }
 
     incorrectRegistration(){          
         cy.contains('É necessário informar um endereço de email').should('be.visible')  

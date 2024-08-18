@@ -1,7 +1,7 @@
 import LoginPage from '../pages/loginPage';
 import HomePage from '../pages/homePage';
 import CadastroPage from '../pages/cadastroPage'
-import userData   from '../fixtures/user-data.json'
+import {usuarios}   from '../fixtures/user-data.json'
 
 
 const loginPage = new LoginPage()
@@ -23,19 +23,19 @@ describe('AdoPet', () => {
   it('Registration - Success', () => {
     cadastroPage.accessCadastro()
     cadastroPage.correctRegistrationInit()
+    loginPage.buttonToEnter()
   })
   
   it('Registration - Failed', () =>{
     cadastroPage.accessCadastro()
-    cadastroPage.buttonCadastration()
+    loginPage.buttonToEnter()
     cadastroPage.incorrectRegistration()
   })
 
-  it('Login - Success', () => {
-    loginPage.accessLoginPage()
+  it.only('Login - Success', () => {
     loginPage.loginSuccessfully()              
-    cadastroPage.buttonCadastration()
-  
+    loginPage.buttonToEnter()
+    loginPage.checkLoginSuccessfuly()
   })
   
   it('Login - Failed', () => {

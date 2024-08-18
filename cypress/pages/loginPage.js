@@ -17,8 +17,13 @@ class LoginPage {
     }
     loginSuccessfully(){
         const selectors = this.selectorsList();
-        cy.get(selectors.email).type('brunosr099@outlook.com');
-        cy.get(selectors.password).type('Senha1234');
+        cy.get(selectors.email).type('brunos@teste.com')
+        cy.get(selectors.password).type('Senha199')
+    }
+
+    checkLoginSuccessfuly(){
+        cy.url().should('include', '/home')
+        cy.contains('Veja os amigos disponíveis para adoção!').should('be.visible')
     }
 
     loginInvalid(){
@@ -37,6 +42,7 @@ class LoginPage {
         cy.contains('É necessário informar um endereço de email').should('be.visible')
         cy.contains('Insira sua senha').should('be.visible')
     }
+
 
 }
 export default LoginPage
